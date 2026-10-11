@@ -1,0 +1,764 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موبيليات درويش - أثاث دمياطي فاخر</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Cairo Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            50: '#fbf8ef',
+                            100: '#f5edd6',
+                            200: '#ebd8ad',
+                            300: '#dfbd7a',
+                            400: '#d39e48',
+                            500: '#b87e2b',
+                            600: '#9b6222',
+                            700: '#7c481f',
+                            800: '#683c20',
+                            900: '#56331e',
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f8fafc;
+            -webkit-tap-highlight-color: transparent;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased pb-20 md:pb-0">
+
+    <!-- Top Bar Notice -->
+    <div class="bg-slate-900 text-amber-300 text-xs py-2 px-4 text-center font-medium flex justify-between items-center max-w-7xl mx-auto">
+        <span>✨ أهلاً بكم في موبيليات درويش: خصومات تصل إلى 25% على الصالونات والمطابخ!</span>
+        <span class="hidden sm:inline"><i class="fa-solid fa-location-dot text-amber-500 ml-1"></i> جمصة - كفر البطيخ - دمياط</span>
+    </div>
+
+    <!-- Main Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="filterCategory('all')">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-700 via-amber-500 to-amber-300 flex items-center justify-center text-white shadow-lg shadow-amber-500/20">
+                        <i class="fa-solid fa-couch text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-black text-slate-900 tracking-tight leading-tight">موبيليات <span class="text-amber-600">درويش</span></h1>
+                        <p class="text-xs text-slate-500 font-semibold">أثاث دمياطي فاخر بأعلى جودة</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Search -->
+                <div class="hidden md:flex flex-1 max-w-md mx-8 relative">
+                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="ابحث عن غرفة نوم، صالون، سفرة..." 
+                           class="w-full bg-slate-100 border border-transparent rounded-full py-2.5 pr-11 pl-4 text-sm focus:bg-white focus:border-amber-500 focus:outline-none transition">
+                    <i class="fa-solid fa-magnifying-glass absolute right-4 top-3.5 text-slate-400"></i>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-3">
+                    <!-- Phone Quick Dial -->
+                    <a href="tel:01042990404" class="hidden sm:flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-xl text-xs font-bold transition">
+                        <i class="fa-solid fa-phone text-emerald-600 text-sm"></i>
+                        <span>01042990404</span>
+                    </a>
+
+                    <!-- Cart Icon Button -->
+                    <button onclick="toggleCartModal()" class="relative p-3 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-xl transition flex items-center justify-center">
+                        <i class="fa-solid fa-basket-shopping text-xl"></i>
+                        <span id="cartCountBadge" class="absolute -top-1.5 -right-1.5 bg-red-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold border-2 border-white shadow">0</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Mobile Search Bar -->
+            <div class="pb-3 md:hidden">
+                <div class="relative">
+                    <input type="text" id="mobileSearchInput" oninput="handleMobileSearch()" placeholder="ابحث عن أثاث منزلُك..." 
+                           class="w-full bg-slate-100 border border-transparent rounded-xl py-2 pr-10 pl-4 text-sm focus:bg-white focus:border-amber-500 focus:outline-none">
+                    <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-3 text-slate-400 text-xs"></i>
+                </div>
+            </div>
+        </div>
+
+        <nav class="border-t border-slate-100 bg-slate-50/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-2 overflow-x-auto py-3 hide-scrollbar text-sm font-semibold text-slate-600">
+                    <button onclick="filterCategory('all')" id="btn-all" class="category-btn active bg-amber-600 text-white px-4 py-2 rounded-full whitespace-nowrap shadow-sm transition">الكل</button>
+                    <button onclick="filterCategory('bedrooms')" id="btn-bedrooms" class="category-btn bg-white hover:bg-amber-50 hover:text-amber-600 border border-slate-200 px-4 py-2 rounded-full whitespace-nowrap transition">غرف نوم</button>
+                    <button onclick="filterCategory('living')" id="btn-living" class="category-btn bg-white hover:bg-amber-50 hover:text-amber-600 border border-slate-200 px-4 py-2 rounded-full whitespace-nowrap transition">غرف معيشة</button>
+                    <button onclick="filterCategory('salons')" id="btn-salons" class="category-btn bg-white hover:bg-amber-50 hover:text-amber-600 border border-slate-200 px-4 py-2 rounded-full whitespace-nowrap transition">صالونات وأنتريهات</button>
+                    <button onclick="filterCategory('dining')" id="btn-dining" class="category-btn bg-white hover:bg-amber-50 hover:text-amber-600 border border-slate-200 px-4 py-2 rounded-full whitespace-nowrap transition">سفرة وطاولات</button>
+                    <button onclick="filterCategory('kitchens')" id="btn-kitchens" class="category-btn bg-white hover:bg-amber-50 hover:text-amber-600 border border-slate-200 px-4 py-2 rounded-full whitespace-nowrap transition">مطابخ ودريسنج</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        
+        <!-- Store Banner Hero -->
+        <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-900 mb-8 min-h-[220px] sm:min-h-[300px] flex items-center">
+            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=80" alt="أثاث موبيليات درويش" class="absolute inset-0 w-full h-full object-cover opacity-40">
+            <div class="relative z-10 p-6 sm:p-10 max-w-2xl">
+                <span class="inline-block px-3 py-1 bg-amber-500/20 backdrop-blur-md text-amber-300 rounded-full text-xs font-bold mb-3 border border-amber-500/30">موبيليات درويش 🇪🇬</span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white mb-2 leading-tight">فخامة الأثاث الدمياطي الأصيل لبيتك</h2>
+                <p class="text-slate-300 text-xs sm:text-base mb-6">تصاميم كلاسيكية ومودرن من أجود أنواع الخشب الزان الأحمر. تشطيب فندقي ممتاز بأفضل الأسعار.</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#products-section" class="bg-amber-600 hover:bg-amber-500 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-amber-600/30 transition flex items-center gap-2">
+                        <span>تصفح الكتالوج</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                    <a href="https://wa.me/201042990404" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-emerald-600/30 transition flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>تواصل مباشر</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="products-section" class="mb-6 flex justify-between items-center">
+            <div>
+                <h3 id="categoryTitle" class="text-xl font-bold text-slate-900">جميع المنتجات</h3>
+                <p class="text-xs text-slate-500">اختر أثاثك المفضل من موبيليات درويش مع خدمة التوصيل والتركيب للمنزل</p>
+            </div>
+            <span id="productCount" class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1.5 rounded-full border border-amber-200">6 منتجات</span>
+        </div>
+
+        <!-- Products Grid Container -->
+        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic JS Injected Cards -->
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-300 mt-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- Info Column 1 -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-amber-600 flex items-center justify-center text-white">
+                            <i class="fa-solid fa-couch"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white">موبيليات درويش</h4>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                        نقدم أحدث وأرقى تشكيلات الموبيليات والأثاث المنزلي المصنوع من خشب الزان والأخشاب الطبيعية بمدينة دمياط. أثاث فاخر يعيش للأجيال.
+                    </p>
+                </div>
+
+                <!-- Info Column 2 (Address & Contact) -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4 border-r-4 border-amber-500 pr-3">بيانات العنوان والتواصل</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-amber-500 mt-1"></i>
+                            <span>جمصة - كفر البطيخ - محافظة دمياط</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-amber-500"></i>
+                            <span>الهاتف: 01042990404</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-emerald-500 text-lg"></i>
+                            <span>واتساب: 01042990404</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-wallet text-amber-500"></i>
+                            <span>فودافون كاش: 01042990404</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Info Column 3 (Quick Guarantee) -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4 border-r-4 border-amber-500 pr-3">ضمان وجودة موبيليات درويش</h4>
+                    <div class="bg-slate-800/80 p-4 rounded-2xl border border-slate-700/60">
+                        <div class="flex items-center gap-2 text-amber-400 mb-2 font-bold text-sm">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>ضمان 10 سنوات على الخشب</span>
+                        </div>
+                        <p class="text-xs text-slate-400">جميع المنتجات مجهزة بأعلى معايير الجودة والدهانات المقاومة للخدش ورطوبة الجو.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>جميع الحقوق محفوظة © 2026 - موبيليات درويش للأثاث الدمياطي</p>
+                <div class="flex gap-4 text-lg">
+                    <a href="https://wa.me/201042990404" class="hover:text-emerald-400 transition"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="tel:01042990404" class="hover:text-amber-400 transition"><i class="fa-solid fa-phone"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Navigation Bar -->
+    <div class="md:hidden fixed bottom-0 right-0 left-0 bg-white border-t border-slate-200 py-2 px-6 z-30 flex justify-between items-center shadow-lg">
+        <button onclick="filterCategory('all')" class="flex flex-col items-center text-amber-600">
+            <i class="fa-solid fa-store text-lg"></i>
+            <span class="text-[10px] font-bold mt-1">الرئيسية</span>
+        </button>
+        <button onclick="toggleCartModal()" class="flex flex-col items-center text-slate-600 relative">
+            <i class="fa-solid fa-basket-shopping text-lg"></i>
+            <span class="text-[10px] font-bold mt-1">السلة</span>
+            <span id="mobileCartBadge" class="absolute -top-1 -right-2 bg-red-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+        </button>
+        <a href="https://wa.me/201042990404" target="_blank" class="flex flex-col items-center text-emerald-600">
+            <i class="fa-brands fa-whatsapp text-xl"></i>
+            <span class="text-[10px] font-bold mt-1">واتساب</span>
+        </a>
+        <a href="tel:01042990404" class="flex flex-col items-center text-blue-600">
+            <i class="fa-solid fa-phone text-lg"></i>
+            <span class="text-[10px] font-bold mt-1">اتصل بنا</span>
+        </a>
+    </div>
+
+    <!-- Cart Modal Drawer -->
+    <div id="cartModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden transition-opacity">
+        <div class="fixed inset-y-0 left-0 max-w-full flex pl-0 sm:pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between">
+                
+                <!-- Drawer Header -->
+                <div class="p-4 sm:p-6 bg-slate-900 text-white flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-basket-shopping text-amber-400 text-xl"></i>
+                        <h3 class="text-lg font-bold">سلة الشراء والتأكيد - موبيليات درويش</h3>
+                    </div>
+                    <button onclick="toggleCartModal()" class="text-slate-400 hover:text-white p-1 text-xl">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Drawer Scrollable Body -->
+                <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+                    
+                    <!-- Selected Items Container -->
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-700 mb-3 border-b pb-2">المنتجات المختارة</h4>
+                        <div id="cartItemsList" class="space-y-3">
+                            <!-- Items Injected by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Price Summary Box -->
+                    <div class="bg-slate-50 p-4 rounded-2xl space-y-2 border border-slate-200">
+                        <div class="flex justify-between text-sm text-slate-600">
+                            <span>إجمالي المنتجات:</span>
+                            <span id="subtotalPrice" class="font-bold">0 ج.م</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-slate-600">
+                            <span>مبلغ التوصيل (دمياط / المحافظات):</span>
+                            <span class="text-emerald-600 font-bold">حسب المحافظة</span>
+                        </div>
+                        <div class="border-t border-slate-200 pt-2 flex justify-between text-base font-extrabold text-slate-900">
+                            <span>الإجمالي الكلي:</span>
+                            <span id="totalPrice" class="text-amber-700">0 ج.م</span>
+                        </div>
+                    </div>
+
+                    <!-- Customer Info Form -->
+                    <div id="checkoutForm" class="space-y-4">
+                        <h4 class="text-sm font-bold text-slate-700 border-b pb-2">بيانات استلام الطلب</h4>
+                        
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">الاسم بالكامل *</label>
+                            <input type="text" id="custName" placeholder="أدخل اسمك الكريم" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-sm focus:bg-white focus:border-amber-500 focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">رقم الهاتف التواصل *</label>
+                            <input type="tel" id="custPhone" placeholder="01XXXXXXXXX" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-sm focus:bg-white focus:border-amber-500 focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">عنوان التوصيل بالتفصيل *</label>
+                            <textarea id="custAddress" rows="2" placeholder="المحافظة - المدينة - اسم الشارع - رقم العقار" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-sm focus:bg-white focus:border-amber-500 focus:outline-none"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-2">طريقة الدفع الفضلى *</label>
+                            <div class="grid grid-cols-1 gap-2">
+                                <label class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl cursor-pointer hover:border-amber-500 transition bg-slate-50">
+                                    <input type="radio" name="paymentMethod" value="vodafone" checked onchange="toggleVodafoneNotice(true)" class="text-amber-600 focus:ring-amber-500">
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm font-bold text-slate-800">فودافون كاش (Vodafone Cash)</span>
+                                            <span class="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded font-bold">موصى به</span>
+                                        </div>
+                                        <p class="text-xs text-slate-500">التحويل على الرقم: <strong class="text-slate-900">01042990404</strong></p>
+                                    </div>
+                                </label>
+
+                                <label class="flex items-center gap-3 p-3 border border-slate-200 rounded-xl cursor-pointer hover:border-amber-500 transition bg-slate-50">
+                                    <input type="radio" name="paymentMethod" value="cod" onchange="toggleVodafoneNotice(false)" class="text-amber-600 focus:ring-amber-500">
+                                    <span class="text-sm font-bold text-slate-800">الدفع نقداً عند الاستلام (Cash)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Vodafone Instructions Box -->
+                        <div id="vodafoneNotice" class="bg-red-50 border border-red-200 rounded-2xl p-4 text-xs space-y-2">
+                            <div class="flex items-center gap-2 text-red-800 font-bold">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <span>خطوات الدفع عبر فودافون كاش:</span>
+                            </div>
+                            <ol class="list-decimal list-inside text-red-700 space-y-1 pr-1">
+                                <li>قم بتحويل المبلغ إلى الرقم: <strong class="underline">01042990404</strong></li>
+                                <li>احتفظ بصورة أو إيصال تحويل العملية.</li>
+                                <li>انقر على زر التأكيد أدناه لإرسال الإيصال وتفاصيل الطلب للواتساب مباشرة.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="p-4 sm:p-6 bg-slate-50 border-t border-slate-200 space-y-2">
+                    <button onclick="submitOrderToWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        <span>تأكيد الطلب عبر الواتساب</span>
+                    </button>
+                    <p class="text-[11px] text-center text-slate-500">سيتم توجيهك مباشرة لقسم المبيعات بموبيليات درويش عبر الواتساب (01042990404)</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Quick View Modal -->
+    <div id="productDetailModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl relative">
+            <button onclick="closeProductModal()" class="absolute top-4 left-4 z-10 bg-slate-900/60 hover:bg-slate-900 text-white w-9 h-9 rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modalProductContent">
+                <!-- JS Injected Content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Message -->
+    <div id="toast" class="fixed bottom-20 md:bottom-6 right-6 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl transform translate-y-32 opacity-0 transition-all duration-300 z-50 flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span id="toastMsg" class="text-xs font-bold">تمت إضافة المنتج إلى السلة</span>
+    </div>
+
+    <script>
+        // Catalog Data Store
+        const productsData = [
+            {
+                id: 1,
+                title: "غرفة نوم الملكة لويز - خشب زان",
+                category: "bedrooms",
+                price: 58000,
+                rating: 5,
+                reviews: 18,
+                image: "https://images.unsplash.com/photo-1540518614846-7ede433c5172?auto=format&fit=crop&w=800&q=80",
+                desc: "دولاب 6 ضلفة + سرير 170 سم + 2 كومود + تسريحة فاخرة مع مرآة كريستال. محفورة يدوياً بأيدي صُناع دمياط."
+            },
+            {
+                id: 2,
+                title: "طقم صالون إمبريال مذهب",
+                category: "salons",
+                price: 42000,
+                rating: 5,
+                reviews: 24,
+                image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=800&q=80",
+                desc: "كنبة ثلاثية + كنبة ثنائية + 2 فوتيه + طاولة رئيسية. قماش مقاوِم للبقع ورغوة عالية الكثافة."
+            },
+            {
+                id: 3,
+                title: "غرفة سفرة مودرن 8 كراسي",
+                category: "dining",
+                price: 36500,
+                rating: 4.9,
+                reviews: 12,
+                image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=800&q=80",
+                desc: "طاولة سفرة رخام إسباني + 8 كراسي مريحة + نيش مودرن إضاءة ليد + بوفيه فاخر بكريستال."
+            },
+            {
+                id: 4,
+                title: "ركنة معيشة مودرن L-Shape",
+                category: "living",
+                price: 24000,
+                rating: 4.8,
+                reviews: 31,
+                image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=800&q=80",
+                desc: "تتسع لـ 6 أشخاص، قماش جلد مقلوب مستورد مع ميكانيزم سرير ومساحة تخزين سفلية هيدروليك."
+            },
+            {
+                id: 5,
+                title: "مطبخ ألوميتال بخشب الأرو 3 متر",
+                category: "kitchens",
+                price: 29500,
+                rating: 5,
+                reviews: 15,
+                image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80",
+                desc: "وحدات علوية وسفلية متكاملة مقاومة للمياه والحرارة، شاملة رخام جلاكسي طبيعي وإكسسوارات إغلاق صامت."
+            },
+            {
+                id: 6,
+                title: "دريسنج روم (Dressing Room) ذكي",
+                category: "kitchens",
+                price: 31000,
+                rating: 4.9,
+                reviews: 9,
+                image: "https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&w=800&q=80",
+                desc: "تصميم أمريكي مفتوح مع أرفف زجاجية وإضاءات حساسة للحركة وشماعات هيدروليكية سحاب."
+            }
+        ];
+
+        // State variables
+        let cart = [];
+        let currentFilter = 'all';
+
+        // Format currency helper
+        function formatPrice(amount) {
+            return amount.toLocaleString('ar-EG') + ' ج.م';
+        }
+
+        // Initialize application on load
+        window.onload = function() {
+            renderProducts(productsData);
+            updateCartUI();
+        };
+
+        // Render products into HTML grid
+        function renderProducts(list) {
+            const grid = document.getElementById('productsGrid');
+            const countEl = document.getElementById('productCount');
+            grid.innerHTML = '';
+            
+            countEl.textContent = `${list.length} منتجات`;
+
+            if (list.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-500">
+                        <i class="fa-solid fa-couch text-4xl mb-3 text-slate-300"></i>
+                        <p class="font-bold">عذراً، لم نجد منتجات تطابق بحثك</p>
+                    </div>
+                `;
+                return;
+            }
+
+            list.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col justify-between group";
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="relative overflow-hidden h-56 bg-slate-100 cursor-pointer" onclick="openProductModal(${item.id})">
+                            <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 right-3 bg-amber-600/90 backdrop-blur-md text-white text-[11px] font-bold px-3 py-1 rounded-full">
+                                خشب دمياطي زان
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-1 text-amber-500 text-xs mb-2">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="font-bold text-slate-700">${item.rating}</span>
+                                <span class="text-slate-400">(${item.reviews} تقييم)</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base mb-2 hover:text-amber-600 transition cursor-pointer" onclick="openProductModal(${item.id})">${item.title}</h4>
+                            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed mb-4">${item.desc}</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-0">
+                        <div class="flex items-center justify-between border-t border-slate-100 pt-4 mb-4">
+                            <div>
+                                <span class="block text-[10px] text-slate-400 font-bold">السعر المطلوب</span>
+                                <span class="text-lg font-extrabold text-amber-700">${formatPrice(item.price)}</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="addToCart(${item.id})" class="bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>إضافة للسلة</span>
+                            </button>
+                            <button onclick="buyNow(${item.id})" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-1 shadow-md shadow-amber-600/20">
+                                <span>شراء الآن</span>
+                                <i class="fa-solid fa-bolt text-amber-300"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCategory(cat) {
+            currentFilter = cat;
+            
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-600', 'text-white');
+                btn.classList.add('bg-white', 'border-slate-200');
+            });
+            const activeBtn = document.getElementById(`btn-${cat}`);
+            if(activeBtn) {
+                activeBtn.classList.remove('bg-white', 'border-slate-200');
+                activeBtn.classList.add('bg-amber-600', 'text-white');
+            }
+
+            const titles = {
+                'all': 'جميع المنتجات',
+                'bedrooms': 'أطقم غرف النوم الدمياطي',
+                'living': 'أنتريهات وغرف المعيشة',
+                'salons': 'الصالونات الفاخرة',
+                'dining': 'طاولات السفرة والنيش',
+                'kitchens': 'المطابخ والدريسنج روم'
+            };
+            document.getElementById('categoryTitle').textContent = titles[cat] || 'المنتجات';
+
+            if (cat === 'all') {
+                renderProducts(productsData);
+            } else {
+                const filtered = productsData.filter(p => p.category === cat);
+                renderProducts(filtered);
+            }
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const filtered = productsData.filter(p => 
+                p.title.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query)
+            );
+            renderProducts(filtered);
+        }
+
+        function handleMobileSearch() {
+            const query = document.getElementById('mobileSearchInput').value.trim().toLowerCase();
+            const filtered = productsData.filter(p => 
+                p.title.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query)
+            );
+            renderProducts(filtered);
+        }
+
+        function addToCart(id) {
+            const item = productsData.find(p => p.id === id);
+            const existing = cart.find(c => c.id === id);
+
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...item, qty: 1 });
+            }
+
+            updateCartUI();
+            showToast(`تمت إضافة "${item.title}" إلى السلة`);
+        }
+
+        function buyNow(id) {
+            addToCart(id);
+            toggleCartModal();
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(c => c.id === id);
+            if (!item) return;
+
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(c => c.id !== id);
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(c => c.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            document.getElementById('cartCountBadge').textContent = totalQty;
+            document.getElementById('mobileCartBadge').textContent = totalQty;
+            
+            document.getElementById('subtotalPrice').textContent = formatPrice(totalPrice);
+            document.getElementById('totalPrice').textContent = formatPrice(totalPrice);
+
+            const cartList = document.getElementById('cartItemsList');
+            cartList.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartList.innerHTML = `
+                    <div class="text-center py-8 text-slate-400">
+                        <i class="fa-solid fa-basket-shopping text-3xl mb-2"></i>
+                        <p class="text-xs font-bold">سلة الشراء فارغة حالياً</p>
+                    </div>
+                `;
+                return;
+            }
+
+            cart.forEach(item => {
+                const el = document.createElement('div');
+                el.className = "flex items-center gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200/80";
+                el.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="w-14 h-14 object-cover rounded-xl">
+                    <div class="flex-1">
+                        <h5 class="text-xs font-bold text-slate-900 line-clamp-1">${item.title}</h5>
+                        <span class="text-xs text-amber-700 font-extrabold">${formatPrice(item.price)}</span>
+                        <div class="flex items-center gap-2 mt-1">
+                            <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 rounded-lg bg-slate-200 hover:bg-slate-300 flex items-center justify-center text-xs font-bold">-</button>
+                            <span class="text-xs font-bold text-slate-800">${item.qty}</span>
+                            <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 rounded-lg bg-slate-200 hover:bg-slate-300 flex items-center justify-center text-xs font-bold">+</button>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" class="text-slate-400 hover:text-red-500 p-2">
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                    </button>
+                `;
+                cartList.appendChild(el);
+            });
+        }
+
+        function toggleCartModal() {
+            const modal = document.getElementById('cartModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function toggleVodafoneNotice(show) {
+            const notice = document.getElementById('vodafoneNotice');
+            if (show) {
+                notice.classList.remove('hidden');
+            } else {
+                notice.classList.add('hidden');
+            }
+        }
+
+        function openProductModal(id) {
+            const p = productsData.find(item => item.id === id);
+            if (!p) return;
+
+            const modalContent = document.getElementById('modalProductContent');
+            modalContent.innerHTML = `
+                <img src="${p.image}" alt="${p.title}" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full">موبيليات درويش</span>
+                    <h3 class="text-xl font-bold text-slate-900 mt-2 mb-2">${p.title}</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">${p.desc}</p>
+                    <div class="flex items-center justify-between border-t border-slate-100 pt-4 mb-6">
+                        <div>
+                            <span class="text-[10px] text-slate-400 font-bold block">السعر الإجمالي</span>
+                            <span class="text-xl font-black text-amber-700">${formatPrice(p.price)}</span>
+                        </div>
+                        <div class="flex items-center gap-1 text-amber-500 text-xs">
+                            <i class="fa-solid fa-star"></i>
+                            <span class="font-bold text-slate-800">${p.rating}</span>
+                        </div>
+                    </div>
+                    <button onclick="addToCart(${p.id}); closeProductModal(); toggleCartModal();" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 rounded-xl text-sm transition">
+                        إضافة للسلة وتأكيد الشراء
+                    </button>
+                </div>
+            `;
+            document.getElementById('productDetailModal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productDetailModal').classList.add('hidden');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 3000);
+        }
+
+        // WhatsApp Direct Formatting and Redirect
+        function submitOrderToWhatsApp() {
+            if (cart.length === 0) {
+                alert('سلة التسوق فارغة! الرجاء إضافة منتجات قبل إرسال الطلب.');
+                return;
+            }
+
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+            if (!name || !phone || !address) {
+                alert('الرجاء تعبئة كافة بيانات الاستلام (الاسم، الهاتف، والعنوان)');
+                return;
+            }
+
+            let itemsText = "";
+            let totalSum = 0;
+
+            cart.forEach((item, index) => {
+                const sub = item.price * item.qty;
+                totalSum += sub;
+                itemsText += `${index + 1}. ${item.title} (العدد: ${item.qty}) - بسعر: ${sub.toLocaleString('ar-EG')} ج.م\n`;
+            });
+
+            const paymentStr = paymentMethod === 'vodafone' ? 'فودافون كاش (على الرقم 01042990404)' : 'دفع نقداً عند الاستلام (Cash)';
+
+            const message = `✨ *طلب شراء جديد - موبيليات درويش* ✨\n\n` +
+                            `👤 *بيانات العميل:* \n` +
+                            `• الاسم: ${name}\n` +
+                            `• الهاتف: ${phone}\n` +
+                            `• العنوان: ${address}\n\n` +
+                            `🛋️ *المنتجات المطلوبة:* \n${itemsText}\n` +
+                            `💰 *الإجمالي الكلي:* ${totalSum.toLocaleString('ar-EG')} جنيه مصري\n` +
+                            `💳 *طريقة الدفع:* ${paymentStr}\n\n` +
+                            `📍 *عنوان المعرض:* جمصة - كفر البطيخ - محافظة دمياط\n` +
+                            `شكراً لاختياركم موبيليات درويش!`;
+
+            const encodedMsg = encodeURIComponent(message);
+            const waUrl = `https://wa.me/201042990404?text=${encodedMsg}`;
+
+            window.open(waUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
+```
